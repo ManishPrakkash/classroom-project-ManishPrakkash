@@ -9,7 +9,6 @@ export function AuthProvider({ children }) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
 
-    // Check for existing session on mount
     useEffect(() => {
         const storedUser = localStorage.getItem('lunoré_user');
         if (storedUser) {
