@@ -48,15 +48,41 @@ router.post('/:userId/add', async (req, res) => {
         console.log('🛒 Add to cart request:');
         console.log('   - userId:', userId);
         console.log('   - productId:', productId);
+        console.log('   - productId type:', typeof productId);
         console.log('   - quantity:', quantity);
         console.log('   - variant:', variant);
 
+        // Validate productId
         if (!productId) {
             return res.status(400).json({
                 success: false,
                 message: 'Product ID is required'
             });
         }
+
+        // Check if productId is a valid MongoDB ObjectId
+        const mongoose = await import('mongoose');
+        if (!mongoose.default.Types.ObjectId.isValid(productId)) {
+            console.error('   ❌ Invalid MongoDB ObjectId:', productId);
+            return res.status(400).json({
+                success: false,
+                message: 'Invalid product ID format. Please use MongoDB _id instead of the old numeric id.'
+            });
+        }
+
+        // Import Product model to verify product exists
+        const Product = (await import('../models/Product.js')).default;
+        const productExists = await Product.findById(productId);
+
+        if (!productExists) {
+            console.error('   ❌ Product not found in database:', productId);
+            return res.status(404).json({
+                success: false,
+                message: 'Product not found. The product may have been deleted.'
+            });
+        }
+
+        console.log('   ✅ Product found:', productExists.name);
 
         let cart = await Cart.findOne({ userId });
         console.log('   - Existing cart found:', cart ? 'YES' : 'NO');
@@ -109,12 +135,14 @@ router.post('/:userId/add', async (req, res) => {
         });
     } catch (error) {
         console.error('❌ Failed to add item to cart:', error);
+        console.error('   Error name:', error.name);
         console.error('   Error details:', error.message);
         console.error('   Stack:', error.stack);
         res.status(500).json({
             success: false,
             message: 'Failed to add item to cart',
-            error: error.message
+            error: error.message,
+            details: process.env.NODE_ENV === 'development' ? error.stack : undefined
         });
     }
 });

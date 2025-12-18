@@ -63,6 +63,23 @@ export function CartProvider({ children }) {
             return;
         }
 
+        // Check stock availability
+        const maxStock = product.stock || 999;
+        const existingItem = cart.find(
+            (item) =>
+                item._id === product._id &&
+                JSON.stringify(item.variant) === JSON.stringify(variant)
+        );
+        const currentQuantity = existingItem ? existingItem.quantity : 0;
+        const newTotalQuantity = currentQuantity + quantity;
+
+        if (newTotalQuantity > maxStock) {
+            toastMessages.error(
+                `Cannot add more. Only ${maxStock} available in stock${currentQuantity > 0 ? ` (${currentQuantity} already in cart)` : ''}`
+            );
+            return;
+        }
+
         try {
             // Add to server
             await apiClient.post(`/cart/${userId}/add`, {

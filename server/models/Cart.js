@@ -39,9 +39,8 @@ const cartSchema = new mongoose.Schema({
 });
 
 // Update the updatedAt field before saving
-cartSchema.pre('save', function (next) {
+cartSchema.pre('save', async function () {
     this.updatedAt = Date.now();
-    next();
 });
 
 export default mongoose.model('Cart', cartSchema);

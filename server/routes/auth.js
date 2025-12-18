@@ -4,10 +4,6 @@ import { generateToken } from '../utils/jwt.js';
 
 const router = express.Router();
 
-/**
- * POST /api/auth/login
- * Login with email and password
- */
 router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
