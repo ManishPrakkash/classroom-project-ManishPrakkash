@@ -8,6 +8,7 @@ import { useCart } from '../../app/store/CartContext';
 
 export default function ProductTile({ product, className, aspectRatio = 'portrait' }) {
     const [isHovered, setIsHovered] = useState(false);
+    const [isAddedToCart, setIsAddedToCart] = useState(false);
     const { isInWishlist, toggleWishlist } = useWishlist();
     const { addToCart } = useCart();
 
@@ -20,6 +21,12 @@ export default function ProductTile({ product, className, aspectRatio = 'portrai
     const handleQuickAdd = (e) => {
         e.preventDefault();
         addToCart(product, 1);
+
+        // Show "Added!" feedback
+        setIsAddedToCart(true);
+        setTimeout(() => {
+            setIsAddedToCart(false);
+        }, 2000);
     };
 
     const handleWishlistToggle = (e) => {
@@ -72,13 +79,17 @@ export default function ProductTile({ product, className, aspectRatio = 'portrai
 
                     {/* Quick add button */}
                     <motion.button
-                        className="absolute bottom-4 left-1/2 -translate-x-1/2 px-6 py-2 bg-ivory text-noir-900 text-sm font-medium rounded-md shadow-lg hover:bg-gold-500 transition-colors"
+                        className={`absolute bottom-4 left-1/2 -translate-x-1/2 px-6 py-2 text-sm font-medium rounded-md shadow-lg transition-colors ${isAddedToCart
+                                ? 'bg-gold-600 text-ivory border border-gold-500'
+                                : 'bg-ivory text-noir-900 hover:bg-gold-500'
+                            }`}
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 10 }}
                         transition={{ duration: 0.3 }}
                         onClick={handleQuickAdd}
+                        disabled={isAddedToCart}
                     >
-                        Quick Add
+                        {isAddedToCart ? '✓ Added!' : 'Quick Add'}
                     </motion.button>
 
                     {/* Wishlist button */}

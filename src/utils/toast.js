@@ -4,46 +4,60 @@ import toast from 'react-hot-toast';
 const toastStyles = {
     success: {
         style: {
-            background: '#1a1a1a', // noir-900
-            color: '#f5f5f0', // ivory
-            border: '1px solid #d4af37', // gold-500
-            padding: '16px',
-            borderRadius: '8px',
+            background: 'rgba(26, 26, 26, 0.95)', // noir-900 with transparency
+            color: '#fafaf8', // ivory
+            border: '1px solid #c9a96e', // gold-500
+            padding: '16px 20px',
+            borderRadius: '12px',
             fontSize: '14px',
             fontWeight: '500',
+            boxShadow: '0 10px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(201, 169, 110, 0.1)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+            transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
         },
         iconTheme: {
-            primary: '#d4af37', // gold-500
-            secondary: '#f5f5f0', // ivory
+            primary: '#c9a96e', // gold-500
+            secondary: '#fafaf8', // ivory
         },
+        duration: 3000,
     },
     error: {
         style: {
-            background: '#1a1a1a', // noir-900
-            color: '#f5f5f0', // ivory
+            background: 'rgba(26, 26, 26, 0.95)', // noir-900 with transparency
+            color: '#fafaf8', // ivory
             border: '1px solid #ef4444', // red
-            padding: '16px',
-            borderRadius: '8px',
+            padding: '16px 20px',
+            borderRadius: '12px',
             fontSize: '14px',
             fontWeight: '500',
+            boxShadow: '0 10px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(239, 68, 68, 0.1)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+            transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
         },
         iconTheme: {
             primary: '#ef4444',
-            secondary: '#f5f5f0',
+            secondary: '#fafaf8',
         },
+        duration: 3000,
     },
     loading: {
         style: {
-            background: '#1a1a1a', // noir-900
-            color: '#e5e5dc', // pearl-300
-            border: '1px solid #4a4a4a', // noir-700
-            padding: '16px',
-            borderRadius: '8px',
+            background: 'rgba(26, 26, 26, 0.95)', // noir-900 with transparency
+            color: '#f5f5f5', // pearl-300
+            border: '1px solid #6a6a6a', // noir-700
+            padding: '16px 20px',
+            borderRadius: '12px',
             fontSize: '14px',
             fontWeight: '500',
+            boxShadow: '0 10px 40px rgba(0, 0, 0, 0.3)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+            transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
         },
         iconTheme: {
-            primary: '#d4af37', // gold-500
+            primary: '#c9a96e', // gold-500
             secondary: '#1a1a1a', // noir-900
         },
     },
