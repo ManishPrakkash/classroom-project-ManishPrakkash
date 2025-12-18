@@ -8,8 +8,8 @@ services:
   - type: web
     name: lunore-backend
     runtime: node
-    region: singapore  # Change to your preferred region: oregon, frankfurt, singapore, etc.
-    plan: free  # Options: free, starter, standard, pro
+    region: singapore
+    plan: free
     rootDir: server
     buildCommand: npm install
     startCommand: npm start
@@ -25,30 +25,18 @@ services:
       
       # MongoDB Connection String (REQUIRED - Add in Render Dashboard)
       - key: MONGODB_URI
-        sync: false  # This means you'll add it manually in Render dashboard
+        sync: false
       
       # JWT Secret (REQUIRED - Add in Render Dashboard)
       - key: JWT_SECRET
-        sync: false  # This means you'll add it manually in Render dashboard
+        sync: false
       
-      # CORS Origin (will be auto-set to frontend URL)
+      # CORS Origin (Add manually after frontend is deployed)
       - key: CORS_ORIGIN
-        fromService:
-          type: web
-          name: lunore-frontend
-          property: url
+        sync: false
 
     # Auto-deploy settings
     autoDeploy: true
-    
-    # Scaling configuration (for paid plans)
-    # numInstances: 1
-    
-    # Disk storage (if needed for file uploads, etc.)
-    # disk:
-    #   name: lunore-storage
-    #   mountPath: /opt/render/project/uploads
-    #   sizeGB: 1
 
   # ============================================
   # FRONTEND SERVICE (React/Vite Static Site)
@@ -56,18 +44,14 @@ services:
   - type: web
     name: lunore-frontend
     runtime: static
-    region: singapore  # Should match backend region for lower latency
-    plan: free  # Static sites are free on Render
+    plan: free
     buildCommand: npm install && npm run build
     staticPublishPath: dist
     
-    # Environment variables for frontend (build-time)
+    # Environment variables for frontend (Add backend URL manually after backend is deployed)
     envVars:
       - key: VITE_API_URL
-        fromService:
-          type: web
-          name: lunore-backend
-          property: url
+        sync: false
     
     # Custom headers for security and performance
     headers:
@@ -102,23 +86,20 @@ services:
     autoDeploy: true
 
 # ============================================
-# DATABASES (Optional - if using Render PostgreSQL)
-# ============================================
-# databases:
-#   - name: lunore-db
-#     databaseName: lunore
-#     plan: free
-#     region: singapore
-#     user: lunore_user
-
-# ============================================
-# NOTES FOR DEPLOYMENT:
+# DEPLOYMENT STEPS:
 # ============================================
 # 1. Push this file to your GitHub repository root
-# 2. Connect your repo to Render (https://dashboard.render.com)
-# 3. Render will auto-detect this file and create both services
-# 4. IMPORTANT: Add these secret environment variables in Render Dashboard:
-#    - MONGODB_URI (your MongoDB Atlas connection string)
-#    - JWT_SECRET (a secure random string, e.g., use: openssl rand -base64 32)
-# 5. Both services will auto-deploy on every git push to main branch
-# 6. Frontend will automatically use backend URL (no manual configuration needed)
+# 2. Go to Render Dashboard → New → Blueprint
+# 3. Connect your GitHub repository
+# 4. After services are created, add these environment variables:
+#
+#    BACKEND (lunore-backend):
+#    - MONGODB_URI: mongodb+srv://user:pass@cluster.mongodb.net/lunore
+#    - JWT_SECRET: (generate with: openssl rand -base64 32)
+#    - CORS_ORIGIN: https://lunore-frontend.onrender.com (your frontend URL)
+#
+#    FRONTEND (lunore-frontend):
+#    - VITE_API_URL: https://lunore-backend.onrender.com (your backend URL)
+#
+# 5. Trigger manual redeploy of frontend after adding VITE_API_URL
+# 6. Done! Your app is live 🎉
