@@ -25,6 +25,7 @@
     "tailwindcss": "^4.1.17",
     "@tailwindcss/postcss": "^4.1.17",
     "@vitejs/plugin-react": "^5.1.1",
-    "vite": "^7.2.4"
+    "vite": "^7.2.4",
+    "terser": "^5.36.0"
   }
 }
