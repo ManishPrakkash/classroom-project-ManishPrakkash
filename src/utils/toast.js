@@ -92,6 +92,7 @@ export const toastMessages = {
     loginSuccess: () => showSuccessToast('Welcome back!'),
     logoutSuccess: () => showSuccessToast('Logged out successfully'),
     registrationSuccess: () => showSuccessToast('Account created successfully!'),
+    orderPlaced: () => showSuccessToast('Order placed successfully! 🎉'),
     error: (message) => showErrorToast(message || 'Something went wrong'),
 };
 

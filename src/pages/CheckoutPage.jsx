@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import Button from '../components/ui/Button';
 import { useCart } from '../app/store/CartContext';
+import { toastMessages } from '../utils/toast';
 
 export default function CheckoutPage() {
     const { cart, cartTotal } = useCart();
+    const navigate = useNavigate();
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
         email: '',
@@ -34,7 +37,10 @@ export default function CheckoutPage() {
         if (step < 3) {
             setStep(step + 1);
         } else {
-            alert('Order placed successfully!');
+            toastMessages.orderPlaced();
+            setTimeout(() => {
+                navigate('/');
+            }, 1500);
         }
     };
 
@@ -48,8 +54,8 @@ export default function CheckoutPage() {
                             <div key={s} className="flex items-center">
                                 <div
                                     className={`w-10 h-10 rounded-full flex items-center justify-center font-medium transition-colors ${step >= s
-                                            ? 'bg-noir-900 text-ivory'
-                                            : 'bg-pearl-300 text-noir-600'
+                                        ? 'bg-noir-900 text-ivory'
+                                        : 'bg-pearl-300 text-noir-600'
                                         }`}
                                 >
                                     {s}

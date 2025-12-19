@@ -1,0 +1,250 @@
+/* Order Confirmation Modal Styles */
+
+.order-confirmation-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 9998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.order-confirmation-modal {
+    position: relative;
+    background: white;
+    border-radius: 16px;
+    padding: 48px;
+    max-width: 560px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 9999;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    margin: auto;
+}
+
+/* Custom Scrollbar */
+.order-confirmation-modal::-webkit-scrollbar {
+    width: 8px;
+}
+
+.order-confirmation-modal::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 0 16px 16px 0;
+}
+
+.order-confirmation-modal::-webkit-scrollbar-thumb {
+    background: #c9a96e;
+    border-radius: 4px;
+}
+
+.order-confirmation-modal::-webkit-scrollbar-thumb:hover {
+    background: #b8904f;
+}
+
+/* Greek Pattern Border */
+.greek-pattern-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: linear-gradient(90deg,
+            #c9a96e 0%, #c9a96e 10%, transparent 10%, transparent 20%,
+            #c9a96e 20%, #c9a96e 30%, transparent 30%, transparent 40%,
+            #c9a96e 40%, #c9a96e 50%, transparent 50%, transparent 60%,
+            #c9a96e 60%, #c9a96e 70%, transparent 70%, transparent 80%,
+            #c9a96e 80%, #c9a96e 90%, transparent 90%, transparent 100%);
+    border-radius: 16px 16px 0 0;
+}
+
+/* Success Icon */
+.success-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+}
+
+.success-icon circle {
+    stroke: #c9a96e;
+    stroke-width: 2;
+}
+
+.success-icon path {
+    stroke: #c9a96e;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Modal Content */
+.modal-content {
+    text-align: center;
+}
+
+.modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+    line-height: 1.2;
+}
+
+.modal-subtitle {
+    font-size: 16px;
+    color: #6a6a6a;
+    margin-bottom: 24px;
+    line-height: 1.5;
+}
+
+/* Order Number */
+.order-number-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 16px;
+    background: #f8f8f8;
+    border-radius: 8px;
+    margin-bottom: 24px;
+}
+
+.order-number-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #9a9a9a;
+    font-weight: 500;
+}
+
+.order-number {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a1a;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Quote Section */
+.quote-section {
+    padding: 24px;
+    background: linear-gradient(135deg, #fdfbf7 0%, #f9f5eb 100%);
+    border-left: 4px solid #c9a96e;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    position: relative;
+    text-align: left;
+}
+
+.quote-mark {
+    font-size: 48px;
+    color: #c9a96e;
+    opacity: 0.3;
+    position: absolute;
+    top: 8px;
+    left: 16px;
+    font-family: Georgia, serif;
+    line-height: 1;
+}
+
+.quote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: #2a2a2a;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    padding-left: 32px;
+}
+
+.quote-author {
+    font-size: 14px;
+    color: #6a6a6a;
+    font-weight: 500;
+    text-align: right;
+    padding-right: 8px;
+}
+
+/* Greek Divider */
+.greek-divider {
+    margin: 24px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.greek-key-pattern {
+    width: 100px;
+    height: 10px;
+}
+
+.greek-key-pattern path {
+    stroke: #c9a96e;
+    stroke-width: 1.5;
+    fill: none;
+}
+
+/* Confirmation Message */
+.confirmation-message {
+    font-size: 14px;
+    color: #5a5a5a;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.confirmation-message strong {
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+/* Continue Button */
+.continue-button {
+    width: 100%;
+    padding: 16px 32px;
+    background: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.continue-button:hover {
+    background: #2a2a2a;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.continue-button:active {
+    transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .order-confirmation-modal {
+        padding: 32px 24px;
+        width: 95%;
+    }
+
+    .modal-title {
+        font-size: 24px;
+    }
+
+    .quote-text {
+        font-size: 16px;
+        padding-left: 24px;
+    }
+
+    .success-icon {
+        width: 64px;
+        height: 64px;
+    }
+}
